@@ -1,3 +1,5 @@
+CREATE DATABASE bookstore;
+
 CREATE TABLE theloai (
 	matheloai VARCHAR(255) NOT NULL,
 	tentheloai NVARCHAR(255),
