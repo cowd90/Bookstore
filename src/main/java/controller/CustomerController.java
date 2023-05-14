@@ -364,7 +364,7 @@ public class CustomerController extends HttpServlet {
 	
 	public static String getContent(KhachHang kh) {
 		String link = "http://localhost:8080/JSP_14_Session/customer-controller?action=xac-thuc&maKhachHang=" + kh.getMaKhachHang()+"&maXacThuc="+kh.getMaXacThuc();
-		String content = "<p>TITV.vn xin ch&agrave;o bạn <strong>"+kh.getTenKH()+"</strong>,</p>\r\n"
+		String content = "<p>The Scott's Bookstore xin ch&agrave;o bạn <strong>"+kh.getTenKH()+"</strong>,</p>\r\n"
 				+ "<p>Vui l&ograve;ng x&aacute;c thực t&agrave;i khoản của bạn bằng c&aacute;ch nhập m&atilde; <strong>"+kh.getMaXacThuc()+"</strong>, hoặc click trực tiếp v&agrave;o đường link sau đ&acirc;y:</p>\r\n"
 				+ "<p><a href=\""+link+"\">"+link+"</a></p>\r\n"
 				+ "<p>Đ&acirc;y l&agrave; email tự động, vui l&ograve;ng kh&ocirc;ng phản hồi email n&agrave;y.</p>\r\n"
