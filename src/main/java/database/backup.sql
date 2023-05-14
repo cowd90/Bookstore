@@ -62,7 +62,7 @@ CREATE TABLE hoadon (
 	FOREIGN KEY (makh) REFERENCES khachhang (makhachhang)
 );
 
-CREATE TABLE chitietdh (theloaitacgia
+CREATE TABLE chitietdh (
 	machitietdh VARCHAR(255) NOT NULL,
 	madonhang VARCHAR(255),
 	masp VARCHAR(255),
