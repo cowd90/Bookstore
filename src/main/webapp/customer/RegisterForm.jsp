@@ -81,7 +81,7 @@
 					<option>Chọn một giới tính</option>
 					<option value="Nam" <%= (gender.equals("Nam"))?"selected='selected'":"" %>>Nam</option>
 					<option value="Nữ" <%= (gender.equals("Nữ"))?"selected='selected'":"" %>>Nữ</option>
-					<option value="Khác" <%= (gender.equals("Khác"))?"selected='selected'":"" %>>Khác</option>
+					<option value="Khác" <%= (gender.equals("Khác"))?"selected='selected'"	:"" %>>Khác</option>
 				</select>
 			</div>
 			<div class="col-sm-6">
@@ -103,8 +103,8 @@
 				    <input type="text" class="form-control" id="sdt" name="sdt" required="required" value="<%= sdt %>">
 				</div>
 				<div class="mb-3">
-					<label for="email" class="form-label">Email</label>
-				    <input type="email" class="form-control" id="email" name="email" value="<%= email %>">
+					<label for="email" class="form-label">Email</label><span class="red">*</span>
+				    <input type="email" class="form-control" id="email" name="email" value="<%= email %>" required>
 				</div>
 				<div class="mb-3">
 					<label for="getMessage" class="form-label">Đăng ký nhận email</label>

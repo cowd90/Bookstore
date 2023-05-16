@@ -185,7 +185,13 @@ public class CustomerController extends HttpServlet {
 			} else {
 				Random random = new Random();
 				String customerId = System.currentTimeMillis() + random.nextInt(1000) + "";
-				KhachHang customer = new KhachHang(customerId, username, password, fullName, gender, address, orderAddress, deliveryAddress, java.sql.Date.valueOf(birthdate), sdt, email, (getMessage!=null));
+				Date dob = null;
+				try {
+					dob = Date.valueOf(birthdate);
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+				KhachHang customer = new KhachHang(customerId, username, password, fullName, gender, address, orderAddress, deliveryAddress, dob, sdt, email, (getMessage!=null));
 				if (khachHangDAO.insert(customer) > 0) {
 					String maXacThuc = RandomNumber.getRandomNumber();
 					
