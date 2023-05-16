@@ -194,7 +194,6 @@ public class CustomerController extends HttpServlet {
 				KhachHang customer = new KhachHang(customerId, username, password, fullName, gender, address, orderAddress, deliveryAddress, dob, sdt, email, (getMessage!=null));
 				if (khachHangDAO.insert(customer) > 0) {
 					String maXacThuc = RandomNumber.getRandomNumber();
-					
 					Date todaysDate = new Date(new java.util.Date().getTime());
 					Calendar c = Calendar.getInstance();
 					c.setTime(todaysDate);
@@ -309,7 +308,13 @@ public class CustomerController extends HttpServlet {
 			
 			if (kh != null) {
 				String customerId = kh.getMaKhachHang();
-				KhachHang newCustomer = new KhachHang(customerId, "", "", fullName, gender, address, orderAddress, deliveryAddress, Date.valueOf(birthdate), sdt, email, getMessage!=null);
+				Date dob = null;
+				try {
+					dob =  Date.valueOf(birthdate);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				KhachHang newCustomer = new KhachHang(customerId, "", "", fullName, gender, address, orderAddress, deliveryAddress, dob, sdt, email, getMessage!=null);
 				khDAO.updateInfor(newCustomer);
 				KhachHang updatedCustomer = khDAO.selectById(newCustomer);
 				request.getSession().setAttribute("khachHang", updatedCustomer);

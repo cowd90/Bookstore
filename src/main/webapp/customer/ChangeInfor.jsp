@@ -35,7 +35,12 @@
 		msg = msg.equals("null")?"":msg;
 		
 		String fullName = kh.getTenKH();
-		String birthdate = kh.getNgaySinh().toString();
+		String dob = "";
+		try {
+			dob = kh.getNgaySinh().toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		String gender = kh.getGioiTinh();
 		String address = kh.getDiaChi();
 		String orderAddress = kh.getDiaChiMuaHang();
@@ -61,7 +66,7 @@
 				</div>
 				<div class="mb-3">
 					<label for="birthdate" class="form-label">Ngày sinh</label>
-				    <input type="date" class="form-control" id="birthdate" name="birthdate" value="<%= birthdate %>">
+				    <input type="date" class="form-control" id="birthdate" name="birthdate" value="<%= dob %>">
 				</div>
 				<div class="mb-3">
 					<label for="gender" class="form-label">Giới tính</label>
