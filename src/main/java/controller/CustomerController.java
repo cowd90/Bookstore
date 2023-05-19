@@ -247,11 +247,13 @@ public class CustomerController extends HttpServlet {
 					if (!newPassword.equals(reNewPassword)) {
 						msg = "Mật khẩu không khớp";
 					} else {
-						newPassword = Encode.ToSHA1(newPassword);
-						khachHang.setMatKhau(newPassword);
 						KhachHangDAO khDAO = new KhachHangDAO();
-						if (khDAO.changePassword(khachHang)) {
+						KhachHang updatedCustomer = khDAO.selectById(khachHang);
+						newPassword = Encode.ToSHA1(newPassword);
+						updatedCustomer.setMatKhau(newPassword);
+						if (khDAO.changePassword(updatedCustomer)) {
 							msg = "Mật khẩu thay đổi thành công";
+							khDAO.updateInfor(updatedCustomer);
 						} else {
 							msg = "Quá trình thay đổi mật khẩu không thành công";
 						}
@@ -307,10 +309,11 @@ public class CustomerController extends HttpServlet {
 			}
 			
 			if (kh != null) {
-				String customerId = kh.getMaKhachHang();
-				String verifyId = kh.getMaXacThuc();
-				Timestamp verifyTime = kh.getThoiGianHieuLucMaXacThuc();
-				boolean isVerified = kh.isDaXacThuc();
+				KhachHang updateCustomer = khDAO.selectById(kh);
+				String customerId = updateCustomer.getMaKhachHang();
+				String verifyId = updateCustomer.getMaXacThuc();
+				Timestamp verifyTime = updateCustomer.getThoiGianHieuLucMaXacThuc();
+				boolean isVerified = updateCustomer.isDaXacThuc();
 				Date dob = null;
 				try {
 					dob =  Date.valueOf(birthdate);
@@ -319,8 +322,8 @@ public class CustomerController extends HttpServlet {
 				}
 				KhachHang newCustomer = new KhachHang(customerId, "", "", fullName, gender, address, orderAddress, deliveryAddress, dob, sdt, email, getMessage!=null, verifyId, verifyTime, isVerified);
 				khDAO.updateInfor(newCustomer);
-				KhachHang updatedCustomer = khDAO.selectById(newCustomer);
-				request.getSession().setAttribute("khachHang", updatedCustomer);
+				updateCustomer = khDAO.selectById(newCustomer);
+				request.getSession().setAttribute("khachHang", updateCustomer);
 				msg = "Cập nhật thông tin thành công";
 			}
 			request.setAttribute("msg", msg);
