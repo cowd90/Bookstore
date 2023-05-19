@@ -308,13 +308,16 @@ public class CustomerController extends HttpServlet {
 			
 			if (kh != null) {
 				String customerId = kh.getMaKhachHang();
+				String verifyId = kh.getMaXacThuc();
+				Timestamp verifyTime = kh.getThoiGianHieuLucMaXacThuc();
+				boolean isVerified = kh.isDaXacThuc();
 				Date dob = null;
 				try {
 					dob =  Date.valueOf(birthdate);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				KhachHang newCustomer = new KhachHang(customerId, "", "", fullName, gender, address, orderAddress, deliveryAddress, dob, sdt, email, getMessage!=null);
+				KhachHang newCustomer = new KhachHang(customerId, "", "", fullName, gender, address, orderAddress, deliveryAddress, dob, sdt, email, getMessage!=null, verifyId, verifyTime, isVerified);
 				khDAO.updateInfor(newCustomer);
 				KhachHang updatedCustomer = khDAO.selectById(newCustomer);
 				request.getSession().setAttribute("khachHang", updatedCustomer);
